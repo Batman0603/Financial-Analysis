@@ -33,20 +33,44 @@ def filter_financial_rows(df: pd.DataFrame):
         keywords = [
             "sales",
             "revenue",
-            "profit",
-            "expense",
+            "income",
             "wages",
+            "expense",
             "depreciation",
             "tax",
-            "income"
+            "profit"
         ]
 
+        exclude_keywords = [
+            "ratio",
+            "%",
+            "decrease",
+            "increase",
+            "calculation",
+            "if the",
+            "total actual",
+            "budget",
+            "disclaimer"
+        ]
+
+        # ✅ Include important rows
         df = df[
             df["particulars"]
             .astype(str)
             .str.lower()
             .str.contains("|".join(keywords), na=False)
         ]
+
+        # ❌ Remove calculated / junk rows
+        df = df[
+            ~df["particulars"]
+            .astype(str)
+            .str.lower()
+            .str.contains("|".join(exclude_keywords), na=False)
+        ]
+
+        # ❌ Remove duplicates
+        df = df.drop_duplicates(subset=["particulars"])
 
         return df
 
