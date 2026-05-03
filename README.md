@@ -1,56 +1,91 @@
 # 📊 Financial Statement Analysis API
 
-A backend service built with **FastAPI** that processes financial Excel files and extracts meaningful insights such as **P&L data, Balance Sheet, KPIs, and insights**.
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Active-success?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/FastAPI-Backend-teal?style=for-the-badge&logo=fastapi" />
+  <img src="https://img.shields.io/badge/Python-3.9+-yellow?style=for-the-badge&logo=python" />
+  <img src="https://img.shields.io/badge/Pandas-Data--Processing-black?style=for-the-badge&logo=pandas" />
+  <img src="https://img.shields.io/badge/OpenPyXL-Excel-orange?style=for-the-badge" />
+</p>
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=yourusername&label=Project+Views&color=0e75b6&style=flat" />
+  <img src="https://img.shields.io/github/stars/yourusername/financial-analysis?style=social" />
+  <img src="https://img.shields.io/github/forks/yourusername/financial-analysis?style=social" />
+</p>
 
 ---
 
-# 🚀 Features
+## 🧠 Overview
 
-* 📁 Upload Excel financial statements
-* 📊 Automatically detect:
+A **FastAPI-based backend service** that processes financial Excel files and extracts structured insights such as:
 
-  * Profit & Loss (P&L)
-  * Balance Sheet
-  * Cash Flow (if available)
-* 🧠 Intelligent row filtering (Revenue, Profit, Expenses, etc.)
-* 📈 KPI Calculation:
+- 📊 Profit & Loss  
+- 📑 Balance Sheet  
+- 💸 Cash Flow  
+- 📈 KPIs  
+- ⚠️ Business insights  
 
-  * Revenue
-  * Profit
-  * Expenses
-  * Profit Margin %
-  * Expense Ratio %
-* ⚠️ Business insights generation (e.g., low profit margin)
-* 🛡️ Error handling & clean API responses
+Built to handle real-world messy Excel files with consistency and accuracy.
 
 ---
 
-# 🏗️ Project Structure
+## ⚡ Features
+
+- 📁 Upload Excel financial statements  
+- 📊 Automatic sheet detection (P&L, Balance Sheet, Cash Flow)  
+- 🧠 Intelligent row filtering  
+- 📈 KPI calculations  
+- ⚠️ Insight generation  
+- 🛡️ Robust error handling  
+
+---
+
+## 🏗️ Architecture
+
+```
+        ┌──────────────┐
+        │   Client     │
+        └──────┬───────┘
+               │
+        ┌──────▼────────┐
+        │   FastAPI     │
+        │   Backend     │
+        └──────┬────────┘
+               │
+   ┌───────────┼────────────┐
+   │           │            │
+   ▼           ▼            ▼
+Excel     Processing     KPI Engine
+Parser     Logic         + Insights
+(pandas)                Generator
+```
+
+---
+
+## 🧩 Project Structure
 
 ```
 financial-analysis/
 │
 ├── app/
-│   ├── main.py                # FastAPI entry point
-│   │
+│   ├── main.py
 │   ├── api/
-│   │   └── routes.py          # API endpoints
-│   │
+│   │   └── routes.py
 │   ├── services/
-│   │   ├── analysis_service.py   # Main processing logic
-│   │   ├── excel_service.py     # Excel reading logic
-│   │   ├── classify_service.py  # Sheet classification
-│   │   ├── kpi_service.py       # KPI calculations
-│   │   └── insight_service.py   # Insight generation
-│   │
+│   │   ├── analysis_service.py
+│   │   ├── excel_service.py
+│   │   ├── classify_service.py
+│   │   ├── kpi_service.py
+│   │   └── insight_service.py
 │   ├── utils/
-│   │   └── filters.py           # Row filtering logic
-│   │
+│   │   └── filters.py
 │   └── models/
-│       └── response_model.py    # Response schemas (optional)
+│       └── response_model.py
 │
-├── uploads/                    # Uploaded files (temporary storage)
-│
+├── uploads/
 ├── requirements.txt
 ├── README.md
 └── .gitignore
@@ -58,9 +93,9 @@ financial-analysis/
 
 ---
 
-# ⚙️ Installation
+## 🚀 Getting Started
 
-### 1. Clone the repository
+### 1️⃣ Clone Repository
 
 ```bash
 git clone https://github.com/your-username/financial-analysis.git
@@ -69,29 +104,22 @@ cd financial-analysis
 
 ---
 
-### 2. Create virtual environment
+### 2️⃣ Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-Activate it:
-
-**Linux / Mac**
+Activate:
 
 ```bash
-source venv/bin/activate
-```
-
-**Windows**
-
-```bash
-venv\Scripts\activate
+source venv/bin/activate   # Linux/Mac
+venv\Scripts\activate      # Windows
 ```
 
 ---
 
-### 3. Install dependencies
+### 3️⃣ Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -99,9 +127,7 @@ pip install -r requirements.txt
 
 ---
 
-# ▶️ Running the Application
-
-Start the FastAPI server:
+## ▶️ Run the Application
 
 ```bash
 uvicorn app.main:app --reload
@@ -109,35 +135,30 @@ uvicorn app.main:app --reload
 
 ---
 
-# 🌐 API Access
+## 🌐 API Access
 
-* Swagger UI:
-  👉 http://127.0.0.1:8000/docs
-
-* ReDoc:
-  👉 http://127.0.0.1:8000/redoc
+- Swagger UI → http://127.0.0.1:8000/docs  
+- ReDoc → http://127.0.0.1:8000/redoc  
 
 ---
 
-# 📤 API Usage
+## 📤 API Usage
 
-## Upload Financial File
-
-### Endpoint:
+### Endpoint
 
 ```
 POST /upload
 ```
 
-### Request:
+### Request
 
-* Form-data
-* Key: `file`
-* Value: Excel file (.xlsx)
+- Form-data  
+- Key: `file`  
+- Value: Excel file (.xlsx)
 
 ---
 
-### Response Example:
+### Response Example
 
 ```json
 {
@@ -145,8 +166,8 @@ POST /upload
   "data": {
     "status": "success",
     "data": {
-      "pnl": [...],
-      "balance_sheet": [...],
+      "pnl": [],
+      "balance_sheet": [],
       "cashflow": []
     },
     "kpis": {
@@ -165,35 +186,27 @@ POST /upload
 
 ---
 
-# 🧠 Core Logic
+## 🧠 Core Logic
 
-## 1. Excel Processing
+### 📄 Excel Processing
+- Reads all sheets  
+- Converts to pandas DataFrames  
 
-* Reads all sheets
-* Converts to pandas DataFrames
+### 🧩 Sheet Classification
+- Identifies:
+  - P&L  
+  - Balance Sheet  
+  - Cash Flow  
 
-## 2. Sheet Classification
+### 🔍 Row Filtering
+Extracts:
+- Revenue  
+- Profit  
+- Expenses  
+- Tax  
+- Depreciation  
 
-* Identifies:
-
-  * P&L
-  * Balance Sheet
-  * Cash Flow
-
-## 3. Row Filtering
-
-Filters only relevant financial rows:
-
-* Revenue / Sales
-* Profit
-* Expenses
-* Wages
-* Tax
-* Depreciation
-
----
-
-## 4. KPI Calculation
+### 📈 KPI Calculation
 
 ```python
 profit_margin = (profit / revenue) * 100
@@ -201,30 +214,27 @@ expense_ratio = (expenses / revenue) * 100
 ```
 
 Handles:
-
-* Missing values
-* Zero division
-* Noisy Excel data
-
----
-
-## 5. Insight Generation
-
-Example rules:
-
-* Profit margin < 10% → ⚠️ Low profit margin
-* High expense ratio → ⚠️ High expenses
+- Missing values  
+- Zero division  
+- Noisy Excel data  
 
 ---
 
-# 🛡️ Error Handling
+### ⚠️ Insight Generation
 
-The system safely handles:
+- Profit margin < 10% → Low profit margin  
+- High expense ratio → High expenses  
 
-* Missing columns (`particulars`)
-* Invalid Excel files
-* Empty sheets
-* Parsing failures
+---
+
+## 🛡️ Error Handling
+
+Handles:
+
+- Invalid Excel files  
+- Missing columns  
+- Empty sheets  
+- Parsing failures  
 
 Example:
 
@@ -237,7 +247,7 @@ Example:
 
 ---
 
-# 📦 Requirements
+## 📦 Requirements
 
 ```
 fastapi
@@ -249,48 +259,35 @@ python-multipart
 
 ---
 
-# 🧪 Testing
+## 🧪 Testing
 
-Use Swagger UI:
-
-1. Open `/docs`
-2. Click `POST /upload`
-3. Upload Excel file
-4. View structured output
+1. Open `/docs`  
+2. Use `POST /upload`  
+3. Upload Excel file  
+4. View output  
 
 ---
 
-# 🚀 Future Enhancements
+## 🚀 Future Enhancements
 
-* 📊 Frontend Dashboard (React)
-* 📈 Charts (Revenue vs Profit)
-* 📁 Multi-file upload
-* 🤖 AI-based financial insights
-* 📤 Export to PDF / Excel
-
----
-
-# 👨‍💻 Author
-
-KARTHIKEYAN K R
----
-
-# ⭐ Notes
-
-This project demonstrates:
-
-* Real-world Excel parsing challenges
-* Financial data normalization
-* Backend architecture design
-* Production-ready error handling
+- 📊 Frontend dashboard  
+- 📈 Data visualization  
+- 📁 Multi-file upload  
+- 🤖 AI-based insights  
+- 📤 Export reports  
 
 ---
 
-# 💡 Tip
+## 👨‍💻 Author
 
-Financial Excel files are messy.
-This project is built to **handle real-world inconsistencies**, not perfect data.
+**KARTHIKEYAN K R**
 
 ---
 
+## ⭐ Notes
 
+- Handles real-world Excel inconsistencies  
+- Clean modular backend architecture  
+- Designed for scalability and production use  
+
+---
